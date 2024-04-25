@@ -59,6 +59,8 @@
     </header>
     <!-- End Header Area -->
 
+
+
     <!-- Start galeri Area -->
     <section class="hero-area">
         <div class="container">
@@ -360,7 +362,7 @@
     </section>
     <!-- End div blue Area -->
 
-    <audio autoplay loop>
+    <audio id="myAudio" loop>
         <source src="assets/song/Mars-uin.mp3" type="audio/mpeg">
         Your browser does not support the audio element.
     </audio>
@@ -430,15 +432,17 @@
     <!-- ========================= JS here ========================= -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var audio = document.getElementById("myAudio");
+            audio.play();
+        });
         $(document).ready(function() {
-            // Menerapkan efek fade up pada elemen yang sudah terlihat saat halaman dimuat
             $('.fade-up').each(function() {
                 if (isElementInViewport($(this))) {
                     $(this).addClass('fade-in');
                 }
             });
     
-            // Menerapkan efek fade up saat elemen masuk ke dalam viewport saat di-scroll
             $(window).scroll(function() {
                 $('.fade-up').each(function() {
                     if (isElementInViewport($(this))) {
@@ -447,7 +451,6 @@
                 });
             });
     
-            // Fungsi untuk mengecek apakah elemen ada di dalam viewport
             function isElementInViewport(elem) {
                 var elemTop = elem.offset().top;
                 var elemBottom = elemTop + elem.outerHeight();
