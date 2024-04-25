@@ -59,9 +59,6 @@
     </header>
     <!-- End Header Area -->
 
-    <button style="display: none;" id="playButton">Play Audio</button>
-
-
     <!-- Start galeri Area -->
     <section class="hero-area">
         <div class="container">
@@ -434,18 +431,24 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            var audio = document.getElementById("myAudio");
+    var audio = document.getElementById("myAudio");
+
+    // Play audio when the document is ready
+    audio.play().then(function() {
+        // Autoplay started
+    }).catch(function(error) {
+        // Autoplay was prevented.
+        // Show a play button to the user and call `audio.play()` when clicked
+        var playButton = document.createElement("button");
+        playButton.textContent = "Play Audio";
+        playButton.addEventListener("click", function() {
             audio.play();
-            var playButton = document.getElementById("playButton");
-                
-            playButton.click(); // Secara otomatis mengeksekusi klik pada tombol "Play" saat halaman dimuat
-                
-            playButton.addEventListener("click", function() {
-                audio.play();
-            });
+            playButton.style.display = "none"; // Hide the play button after it's clicked
         });
+        document.body.appendChild(playButton);
+    });
+});
         $(document).ready(function() {
-            playButton.click();
             // Menerapkan efek fade up pada elemen yang sudah terlihat saat halaman dimuat
             $('.fade-up').each(function() {
                 if (isElementInViewport($(this))) {
