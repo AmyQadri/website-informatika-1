@@ -59,6 +59,7 @@
     </header>
     <!-- End Header Area -->
 
+    <button style="display: none;" id="playButton">Play Audio</button>
 
 
     <!-- Start galeri Area -->
@@ -435,14 +436,24 @@
         document.addEventListener("DOMContentLoaded", function() {
             var audio = document.getElementById("myAudio");
             audio.play();
+            var playButton = document.getElementById("playButton");
+                
+            playButton.click(); // Secara otomatis mengeksekusi klik pada tombol "Play" saat halaman dimuat
+                
+            playButton.addEventListener("click", function() {
+                audio.play();
+            });
         });
         $(document).ready(function() {
+            playButton.click();
+            // Menerapkan efek fade up pada elemen yang sudah terlihat saat halaman dimuat
             $('.fade-up').each(function() {
                 if (isElementInViewport($(this))) {
                     $(this).addClass('fade-in');
                 }
             });
     
+            // Menerapkan efek fade up saat elemen masuk ke dalam viewport saat di-scroll
             $(window).scroll(function() {
                 $('.fade-up').each(function() {
                     if (isElementInViewport($(this))) {
@@ -451,6 +462,7 @@
                 });
             });
     
+            // Fungsi untuk mengecek apakah elemen ada di dalam viewport
             function isElementInViewport(elem) {
                 var elemTop = elem.offset().top;
                 var elemBottom = elemTop + elem.outerHeight();
