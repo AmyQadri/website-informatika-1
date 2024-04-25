@@ -6,6 +6,35 @@
 ========================================*/
 @import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap");
 
+.fade-up {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: 1s ease-in-out;
+}
+
+.fade-up.fade-in {
+  opacity: 1;
+  transform: translateY(0px);
+  transition: 1s ease-in-out;
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-4px); 
+  }
+  60% {
+    transform: translateY(-2px);
+  }
+}
+
+.bounce {
+  animation-name: bounce;
+  animation-duration: 2s;
+  animation-iteration-count: infinite; 
+}
 html {
   scroll-behavior: smooth;
 }
