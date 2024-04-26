@@ -10,6 +10,8 @@
     <link rel="shortcut icon" type="image/x-icon" href="assets/images/logo-uin.png" />
 
     <!-- ========================= CSS here ========================= -->
+    <link rel="stylesheet" href="assets/font-awesome-4.7.0/css/font-awesome.css" />
+    <link rel="stylesheet" href="assets/font-awesome-4.7.0/css/font-awesome.min.css" />
     <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
     <link rel="stylesheet" href="assets/css/LineIcons.3.0.css" />
     <link rel="stylesheet" href="assets/css/tiny-slider.css" />
@@ -360,7 +362,7 @@
     </section>
     <!-- End div blue Area -->
 
-    <audio id="myAudio" loop style="display: none;">
+    <audio id="myAudio" autoplay loop style="display: none;">
         <source src="assets/song/su-sayang.mp3" type="audio/mpeg">
         Your browser does not support the audio element.
     </audio>
@@ -426,24 +428,39 @@
     <a href="#" class="scroll-top">
         <i class="lni lni-chevron-up"></i>
     </a>
-
+    
+    <a id="playBtn" style="bottom: 90px;" class="scroll-top">
+        <i class="fa fa-volume-off"></i>
+    </a>
     <!-- ========================= JS here ========================= -->
     <script src="assets/js/jquery-3.7.1.min.js"></script>
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-    var audio = document.getElementById("myAudio");
+$(document).ready(function(){
+    var audio = $("#myAudio")[0];
+    var playBtn = $("#playBtn");
 
-    audio.play().then(function() {
-        }).catch(function(error) {
-            var playButton = document.createElement("button");
-            playButton.textContent = "Play Audio";
-            playButton.addEventListener("click", function() {
+    audio.onplaying = function() {
+        playBtn.find("i").removeClass("fa-volume-off").addClass("fa-volume-up");
+    };
+
+    audio.onpause = function() {
+        playBtn.find("i").removeClass("fa-volume-up").addClass("fa-volume-off");
+    };
+
+    playBtn.click(function(){
+        if (audio.paused) {
             audio.play();
-        });
-        document.body.appendChild(playButton);
+        } else {
+            audio.pause();
+        }
+    });
 
-    });
-    });
+    if (!audio.paused) {
+        playBtn.find("i").removeClass("fa-volume-off").addClass("fa-volume-up");
+    } else {
+        playBtn.find("i").removeClass("fa-volume-up").addClass("fa-volume-off");
+    }
+});
         $(document).ready(function() {
             $('.fade-up').each(function() {
                 if (isElementInViewport($(this))) {
@@ -451,7 +468,6 @@
                 }
             });
     
-            // Menerapkan efek fade up saat elemen masuk ke dalam viewport saat di-scroll
             $(window).scroll(function() {
                 $('.fade-up').each(function() {
                     if (isElementInViewport($(this))) {
@@ -460,7 +476,6 @@
                 });
             });
     
-            // Fungsi untuk mengecek apakah elemen ada di dalam viewport
             function isElementInViewport(elem) {
                 var elemTop = elem.offset().top;
                 var elemBottom = elemTop + elem.outerHeight();
@@ -494,30 +509,6 @@
             controlsText: ['<i class="lni lni-chevron-left"></i>', '<i class="lni lni-chevron-right"></i>'],
         });
 
-        //======== Brand Slider
-        tns({
-            container: '.brands-logo-carousel',
-            autoplay: true,
-            autoplayButtonOutput: false,
-            mouseDrag: true,
-            gutter: 15,
-            nav: false,
-            controls: false,
-            responsive: {
-                0: {
-                    items: 1,
-                },
-                540: {
-                    items: 3,
-                },
-                768: {
-                    items: 5,
-                },
-                992: {
-                    items: 6,
-                }
-            }
-        });
     </script>
 </body>
 
