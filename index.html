@@ -360,8 +360,8 @@
     </section>
     <!-- End div blue Area -->
 
-    <audio id="myAudio" loop>
-        <source src="assets/song/Mars-uin.mp3" type="audio/mpeg">
+    <audio id="myAudio" loop style="display: none;">
+        <source src="assets/song/su-sayang.mp3" type="audio/mpeg">
         Your browser does not support the audio element.
     </audio>
     
@@ -428,28 +428,23 @@
     </a>
 
     <!-- ========================= JS here ========================= -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="assets/js/jquery-3.7.1.min.js"></script>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
     var audio = document.getElementById("myAudio");
 
-    // Play audio when the document is ready
     audio.play().then(function() {
-        // Autoplay started
-    }).catch(function(error) {
-        // Autoplay was prevented.
-        // Show a play button to the user and call `audio.play()` when clicked
-        var playButton = document.createElement("button");
-        playButton.textContent = "Play Audio";
-        playButton.addEventListener("click", function() {
+        }).catch(function(error) {
+            var playButton = document.createElement("button");
+            playButton.textContent = "Play Audio";
+            playButton.addEventListener("click", function() {
             audio.play();
-            playButton.style.display = "none"; // Hide the play button after it's clicked
         });
         document.body.appendChild(playButton);
+
     });
-});
+    });
         $(document).ready(function() {
-            // Menerapkan efek fade up pada elemen yang sudah terlihat saat halaman dimuat
             $('.fade-up').each(function() {
                 if (isElementInViewport($(this))) {
                     $(this).addClass('fade-in');
